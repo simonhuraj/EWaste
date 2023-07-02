@@ -38,5 +38,14 @@ public class UserController {
     public ResponseEntity<User> registerNewUser(@RequestBody User user) {
         return new ResponseEntity<>(userService.registerNewUser(user), HttpStatus.CREATED);
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<Boolean> login(@RequestBody User user) {
+        if (userService.authenticate(user.getUsername(), user.getPassword())) {
+            return ok(true);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+        }
+    }
 }
 

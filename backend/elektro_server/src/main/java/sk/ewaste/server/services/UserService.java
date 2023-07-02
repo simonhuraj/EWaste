@@ -41,7 +41,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean checkPassword(@Nonnull User user, @Nonnull String password) {
+    public boolean authenticate(@Nonnull String username, @Nonnull String password) {
+        User user = getUserByUsername(username);
+
         return passwordEncoder.matches(password, user.getPassword());
     }
 }
