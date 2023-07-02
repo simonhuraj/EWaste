@@ -22,6 +22,6 @@ public class PositionService {
     }
 
     public Position getPositionById(@Nonnull Long id) {
-        return positionRepository.findById(id).orElseThrow(NoResultException::new);
+        return positionRepository.findById(id).orElseThrow(() -> new NoResultException("Position with id " + id + " does not exist"));
     }
 }

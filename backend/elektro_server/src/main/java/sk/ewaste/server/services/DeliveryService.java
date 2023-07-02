@@ -39,7 +39,7 @@ public class DeliveryService {
     }
 
     public Delivery getDeliveryById(@Nonnull Long deliveryId) {
-        return deliveryRepository.findById(deliveryId).orElseThrow(NoResultException::new);
+        return deliveryRepository.findById(deliveryId).orElseThrow(() -> new NoResultException("Delivery with id " + deliveryId + " does not exist"));
     }
 
     @Transactional
@@ -51,7 +51,7 @@ public class DeliveryService {
 
     @Transactional
     public Delivery updateDelivery(@Nonnull Delivery delivery, @Nonnull Long deliveryId) {
-        Delivery toUpdate = deliveryRepository.findById(deliveryId).orElseThrow(NoResultException::new);
+        Delivery toUpdate = getDeliveryById(deliveryId);
 
         personService.removeDeliveredProducts(toUpdate.getPerson(), toUpdate.getQuantity());
         Person updatedPerson = personService.addDeliveredProducts(delivery.getPerson(), delivery.getQuantity());

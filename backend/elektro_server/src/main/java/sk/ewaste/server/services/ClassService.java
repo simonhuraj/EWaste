@@ -7,7 +7,6 @@ import sk.ewaste.server.entities.Clazz;
 import sk.ewaste.server.entities.Person;
 import sk.ewaste.server.repositories.ClassRepository;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ClassService {
     }
 
     public Clazz getClassById(@Nonnull Long id) {
-        return classRepository.findById(id).orElseThrow(NoResultException::new);
+        return classRepository.findById(id).orElseThrow(() -> new NoResultException("Class with id " + id + " does not exist"));
     }
 
     public Clazz addNewClass(@Nonnull Clazz clazz) {
@@ -37,7 +36,7 @@ public class ClassService {
     }
 
     public Clazz updateClass(@Nonnull Clazz clazz, @Nonnull Long id) {
-        if (clazz.getClassId() != id) throw new IllegalArgumentException("Class id does not match");
+        if (!id.equals(clazz.getClassId())) throw new IllegalArgumentException("Class id does not match updated class");
 
         Clazz toUpdate = getClassById(id);
         toUpdate.setName(clazz.getName());

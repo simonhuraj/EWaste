@@ -22,6 +22,6 @@ public class StateService {
     }
 
     public State getStateById(@Nonnull Long id) {
-        return stateRepository.findById(id).orElseThrow(NoResultException::new);
+        return stateRepository.findById(id).orElseThrow(() -> new NoResultException("State with id " + id + " does not exist"));
     }
 }

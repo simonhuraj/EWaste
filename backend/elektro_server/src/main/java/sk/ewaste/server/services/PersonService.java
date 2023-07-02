@@ -26,7 +26,7 @@ public class PersonService {
     }
 
     public Person getPersonById(@Nonnull Long id) {
-        return personRepository.findById(id).orElseThrow(NoResultException::new);
+        return personRepository.findById(id).orElseThrow(() -> new NoResultException("Person with id " + id + " does not exist"));
     }
 
     public Person addPerson(Person person) {
@@ -34,7 +34,7 @@ public class PersonService {
     }
 
     public Person updatePerson(@Nonnull Person person, long id) {
-        if (person.getPersonId() != id) throw new IllegalArgumentException("Person ID does not match");
+        if (person.getPersonId() != id) throw new IllegalArgumentException("Person id does not match updated person");
 
         Person toUpdate = getPersonById(id);
         toUpdate.setFirstName(person.getFirstName());
@@ -57,10 +57,10 @@ public class PersonService {
         return personRepository.save(toUpdate);
     }
 
-    public Person removeDeliveredProducts(Person person, long quantity) {
+    public void removeDeliveredProducts(Person person, long quantity) {
         Person toUpdate = getPersonById(person.getPersonId());
 
         toUpdate.setQuantity(toUpdate.getQuantity() - quantity);
-        return personRepository.save(toUpdate);
+        personRepository.save(toUpdate);
     }
 }

@@ -22,6 +22,6 @@ public class CategoryService {
     }
 
     public Category getCategoryById(@Nonnull Long id) {
-        return categoryRepository.findById(id).orElseThrow(NoResultException::new);
+        return categoryRepository.findById(id).orElseThrow(() -> new NoResultException("Category with id " + id + " not found"));
     }
 }

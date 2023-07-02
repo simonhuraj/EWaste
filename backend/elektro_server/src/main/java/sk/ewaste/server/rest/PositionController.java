@@ -1,4 +1,4 @@
-package sk.ewaste.server.controllers;
+package sk.ewaste.server.rest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

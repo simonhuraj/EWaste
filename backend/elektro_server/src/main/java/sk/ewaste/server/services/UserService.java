@@ -20,11 +20,11 @@ public class UserService {
     }
 
     public User getUserByUsername(@Nonnull String username) {
-        return userRepository.findByUsername(username).orElseThrow(NoResultException::new);
+        return userRepository.findByUsername(username).orElseThrow(() -> new NoResultException("User with username " + username + " does not exist"));
     }
 
     public User getUserById(@Nonnull Long userId) {
-        return userRepository.findById(userId).orElseThrow(NoResultException::new);
+        return userRepository.findById(userId).orElseThrow(() -> new NoResultException("User with id " + userId + " does not exist"));
     }
 
     public User registerNewUser(@Nonnull User user) {
@@ -33,7 +33,7 @@ public class UserService {
         }
 
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new IllegalArgumentException("User already exists");
+            throw new IllegalArgumentException("User with username '" + user.getUsername() + "' already exists");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
