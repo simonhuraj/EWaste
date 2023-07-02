@@ -21,17 +21,20 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/person")
 public class PersonController {
 
-    private PersonService personService;
+    private final PersonService personService;
 
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
 
-    // TODO: create endpoint that will return all people without class
-
     @GetMapping
     public ResponseEntity<List<Person>> getAllPersons() {
         return ok(personService.getAllPersons());
+    }
+
+    @GetMapping("/noclass")
+    public ResponseEntity<List<Person>> getAllPeopleWithoutClass() {
+        return ok(personService.getAllPeopleWithoutClass());
     }
 
     @GetMapping("/{id}")

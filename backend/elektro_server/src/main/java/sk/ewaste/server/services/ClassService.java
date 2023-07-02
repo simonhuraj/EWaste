@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class ClassService {
 
-    private ClassRepository classRepository;
+    private final ClassRepository classRepository;
 
-    private PersonService personService;
+    private final PersonService personService;
 
     public ClassService(ClassRepository classRepository, PersonService personService) {
         this.classRepository = classRepository;

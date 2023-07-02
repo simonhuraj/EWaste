@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/position")
 public class PositionController {
 
-    private PositionService positionService;
+    private final PositionService positionService;
 
     public PositionController(PositionService positionService) {
         this.positionService = positionService;

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class PersonService {
 
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -19,6 +19,10 @@ public class PersonService {
 
     public List<Person> getAllPersons() {
         return personRepository.findAll();
+    }
+
+    public List<Person> getAllPeopleWithoutClass() {
+        return personRepository.findAllWithoutClass();
     }
 
     public Person getPersonById(@Nonnull Long id) {
@@ -44,5 +48,19 @@ public class PersonService {
 
     public void deletePersonById(@Nonnull Long id) {
         personRepository.deleteById(id);
+    }
+
+    public Person addDeliveredProducts(Person person, long quantity) {
+        Person toUpdate = getPersonById(person.getPersonId());
+
+        toUpdate.setQuantity(toUpdate.getQuantity() + quantity);
+        return personRepository.save(toUpdate);
+    }
+
+    public Person removeDeliveredProducts(Person person, long quantity) {
+        Person toUpdate = getPersonById(person.getPersonId());
+
+        toUpdate.setQuantity(toUpdate.getQuantity() - quantity);
+        return personRepository.save(toUpdate);
     }
 }

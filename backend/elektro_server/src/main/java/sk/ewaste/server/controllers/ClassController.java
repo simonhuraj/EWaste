@@ -21,7 +21,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/class")
 public class ClassController {
 
-    private ClassService classService;
+    private final ClassService classService;
 
     public ClassController(ClassService classService) {
         this.classService = classService;
