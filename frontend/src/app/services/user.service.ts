@@ -31,14 +31,14 @@ export class UserService {
         return EMPTY;
       })
     ).subscribe(value => {
-      this.storeUser(user)
+      this.storeToken(user)
       this.user = user;
       this.router.navigateByUrl('');
     });
   }
 
   logout(): void {
-    this.removeUser();
+    this.removeToken();
     this.router.navigateByUrl('/login');
   }
 
@@ -55,21 +55,23 @@ export class UserService {
   private getUser(): User | undefined {
     if (this.user) return this.user;
 
-    const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
+    let token = localStorage.getItem('token');
 
-    if (!username || !password) return undefined;
+    if (!token) return undefined;
+
+    token = atob(token);
+    const username = token.slice(0, token.indexOf(':'));
+    const password = token.slice(token.indexOf(':'));
 
     return new User(username, password);
   }
 
-  private storeUser(user: User): void {
-    localStorage.setItem('username', user.username);
-    localStorage.setItem('password', user.password);
+  private storeToken(user: User): void {
+    const token = btoa(`${user.username}:${user.password}`);
+    localStorage.setItem('token', token);
   }
 
-  private removeUser(): void {
-    localStorage.removeItem('username');
-    localStorage.removeItem('password');
+  private removeToken(): void {
+    localStorage.removeItem('token');
   }
 }
