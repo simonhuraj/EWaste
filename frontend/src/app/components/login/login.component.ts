@@ -17,7 +17,6 @@ export class LoginComponent {
   hide = true;
 
   onSubmit(): void {
-    console.log(this.loginUser);
     this.userService.login(this.loginUser);
   }
 
