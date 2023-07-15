@@ -6,11 +6,13 @@ import {Router} from "@angular/router";
 import {SnackbarService} from "./snackbar.service";
 import {apiUrl} from "../../environment";
 
+const DEFAULT_REDIRECT = 'list';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  public redirectUrl = DEFAULT_REDIRECT;
   private user: User | undefined;
 
   constructor(
@@ -33,12 +35,13 @@ export class UserService {
     ).subscribe(value => {
       this.storeToken(user)
       this.user = user;
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl(this.redirectUrl);
     });
   }
 
   logout(): void {
     this.removeToken();
+    this.redirectUrl = DEFAULT_REDIRECT;
     this.router.navigateByUrl('/login');
   }
 

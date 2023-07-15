@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './components/home/home.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
+import { WasteListComponent } from './pages/waste/waste-list/waste-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
     NotFoundComponent,
     LoginComponent,
     HomeComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    WasteListComponent
   ],
   imports: [
     BrowserModule,
