@@ -34,9 +34,9 @@ public class DeliveryController {
         return ResponseEntity.ok(deliveryService.getAllDeliveriesByPersonId(id));
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/manager/{id}")
     public ResponseEntity<List<Delivery>> getAllDeliveriesByUser(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(deliveryService.getAllDeliveriesByUserId(id));
+        return ResponseEntity.ok(deliveryService.getAllDeliveriesByManagerId(id));
     }
 
     @GetMapping("/functional/{functional}")

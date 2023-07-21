@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from "../entitites/user";
+import {Manager} from "../entitites/manager";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, EMPTY} from "rxjs";
 import {Router} from "@angular/router";
@@ -10,10 +10,10 @@ const DEFAULT_REDIRECT = 'list';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ManagerService {
 
   public redirectUrl = DEFAULT_REDIRECT;
-  private user: User | undefined;
+  private manager: Manager | undefined;
 
   constructor(
     private readonly http: HttpClient,
@@ -23,18 +23,18 @@ export class UserService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getUser();
+    return !!this.getManager();
   }
 
-  login(user: User) {
-    this.http.post<boolean>(apiUrl + 'user/login', user).pipe(
+  login(manager: Manager) {
+    this.http.post<boolean>(apiUrl + 'manager/login', manager).pipe(
       catchError(error => {
         this.snackbarService.errorMessage('Incorrect username or password');
         return EMPTY;
       })
     ).subscribe(value => {
-      this.storeToken(user)
-      this.user = user;
+      this.storeToken(manager)
+      this.manager = manager;
       this.router.navigateByUrl(this.redirectUrl);
     });
   }
@@ -46,17 +46,17 @@ export class UserService {
   }
 
   get authorizationHeader() {
-    if (!this.user) return {};
+    if (!this.manager) return {};
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${this.user.username}:${this.user.password}`)
+        'Authorization': 'Basic ' + btoa(`${this.manager.username}:${this.manager.password}`)
       })
     };
   }
 
-  private getUser(): User | undefined {
-    if (this.user) return this.user;
+  private getManager(): Manager | undefined {
+    if (this.manager) return this.manager;
 
     let token = localStorage.getItem('token');
 
@@ -66,11 +66,11 @@ export class UserService {
     const username = token.slice(0, token.indexOf(':'));
     const password = token.slice(token.indexOf(':'));
 
-    return new User(username, password);
+    return new Manager(username, password);
   }
 
-  private storeToken(user: User): void {
-    const token = btoa(`${user.username}:${user.password}`);
+  private storeToken(manager: Manager): void {
+    const token = btoa(`${manager.username}:${manager.password}`);
     localStorage.setItem('token', token);
   }
 

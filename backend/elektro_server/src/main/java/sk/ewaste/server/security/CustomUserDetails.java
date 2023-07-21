@@ -2,31 +2,32 @@ package sk.ewaste.server.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import sk.ewaste.server.entities.User;
+import sk.ewaste.server.entities.Manager;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class CustomUserDetails implements UserDetails {
 
-    private User user;
+    private final Manager manager;
 
-    public CustomUserDetails(User user) {
-        this.user = user;
+    public CustomUserDetails(Manager manager) {
+        this.manager = manager;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptySet();
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return manager.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return manager.getUsername();
     }
 
     @Override

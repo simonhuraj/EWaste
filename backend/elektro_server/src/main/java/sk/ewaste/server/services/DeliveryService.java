@@ -30,8 +30,8 @@ public class DeliveryService {
         return deliveryRepository.findAllByPersonPersonId(personId);
     }
 
-    public List<Delivery> getAllDeliveriesByUserId(@Nonnull Long userId) {
-        return deliveryRepository.findAllByUserUserId(userId);
+    public List<Delivery> getAllDeliveriesByManagerId(@Nonnull Long managerId) {
+        return deliveryRepository.findAllByManagerManagerId(managerId);
     }
 
     public List<Delivery> getAllByFunctional(boolean functional) {
@@ -64,7 +64,7 @@ public class DeliveryService {
         toUpdate.setFunctional(delivery.isFunctional());
         toUpdate.setCategory(delivery.getCategory());
         toUpdate.setPerson(updatedPerson);
-        toUpdate.setUser(delivery.getUser());
+        toUpdate.setManager(delivery.getManager());
         toUpdate.setState(delivery.getState());
         return deliveryRepository.save(toUpdate);
     }

@@ -2,12 +2,12 @@ package sk.ewaste.server.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import sk.ewaste.server.entities.User;
+import sk.ewaste.server.entities.Manager;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface ManagerRepository extends JpaRepository<Manager, Long> {
 
-    Optional<User> findByUsername(String username);
+    Optional<Manager> findByUsername(String username);
 }

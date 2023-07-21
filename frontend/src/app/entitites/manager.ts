@@ -1,9 +1,9 @@
-export class User {
+export class Manager {
 
   constructor(
     public username: string,
     public password: string,
-    public userId?: number
+    public managerId?: number
   ) {
   }
 }

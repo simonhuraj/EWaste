@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserService} from "../../services/user.service";
+import {ManagerService} from "../../services/manager.service";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ export class HomeComponent {
   title: string = 'E-Waste';
 
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: ManagerService,
   ) {}
 
   logOut() {

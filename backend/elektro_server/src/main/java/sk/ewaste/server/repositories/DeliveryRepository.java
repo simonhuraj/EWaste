@@ -11,7 +11,7 @@ public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 
     List<Delivery> findAllByPersonPersonId(Long personId);
 
-    List<Delivery> findAllByUserUserId(Long userId);
+    List<Delivery> findAllByManagerManagerId(Long managerId);
 
     List<Delivery> findAllByFunctional(boolean functional);
 }

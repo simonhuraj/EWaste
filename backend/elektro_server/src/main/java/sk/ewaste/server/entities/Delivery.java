@@ -51,8 +51,8 @@ public class Delivery {
     private Person person;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
 
     @ManyToOne
     @JoinColumn(name = "state_id")

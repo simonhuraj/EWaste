@@ -15,11 +15,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Manager {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long managerId;
 
     @Column(length = 40, nullable = false, unique = true)
     private String username;

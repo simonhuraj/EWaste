@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {User} from "../../entitites/user";
-import {UserService} from "../../services/user.service";
+import {Manager} from "../../entitites/manager";
+import {ManagerService} from "../../services/manager.service";
 
 @Component({
   selector: 'app-login',
@@ -9,10 +9,10 @@ import {UserService} from "../../services/user.service";
 })
 export class LoginComponent {
 
-  constructor(private readonly userService: UserService) {
+  constructor(private readonly userService: ManagerService) {
   }
 
-  loginUser: User = new User('', '');
+  loginUser: Manager = new Manager('', '');
 
   hide = true;
 

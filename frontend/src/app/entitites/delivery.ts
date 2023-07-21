@@ -1,6 +1,6 @@
 import {Category} from "./category";
 import {Person} from "./person";
-import {User} from "./user";
+import {Manager} from "./manager";
 import {State} from "./state";
 
 export class Delivery {
@@ -13,7 +13,7 @@ export class Delivery {
     public functional: boolean,
     public category: Category,
     public person: Person,
-    public user: User,
+    public user: Manager,
     public state: State,
     public deliveryId?: number,
   ) {

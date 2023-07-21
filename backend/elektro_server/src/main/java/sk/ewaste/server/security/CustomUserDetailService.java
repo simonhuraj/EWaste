@@ -4,22 +4,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import sk.ewaste.server.entities.User;
-import sk.ewaste.server.services.UserService;
+import sk.ewaste.server.entities.Manager;
+import sk.ewaste.server.services.ManagerService;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
-    private final UserService userService;
+    private final ManagerService managerService;
 
-    public CustomUserDetailService(UserService userService) {
-        this.userService = userService;
+    public CustomUserDetailService(ManagerService managerService) {
+        this.managerService = managerService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User userFromDB = userService.getUserByUsername(username);
-        return new CustomUserDetails(userFromDB);
+        Manager managerFromDB = managerService.getManagerByUsername(username);
+        return new CustomUserDetails(managerFromDB);
     }
 }
