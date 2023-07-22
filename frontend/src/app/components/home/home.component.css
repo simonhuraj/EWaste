@@ -5,3 +5,7 @@
 .button + .button {
   margin-left: 20px;
 }
+
+.content {
+  height: calc(100% - 64px); /* 64px is the height of nav-bar */
+}

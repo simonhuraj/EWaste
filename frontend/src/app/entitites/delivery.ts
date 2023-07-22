@@ -13,7 +13,7 @@ export class Delivery {
     public functional: boolean,
     public category: Category,
     public person: Person,
-    public user: Manager,
+    public manager: Manager,
     public state: State,
     public deliveryId?: number,
   ) {
