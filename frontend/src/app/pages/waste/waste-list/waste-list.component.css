@@ -1,5 +1,13 @@
-div {
+.table-wrapper {
+  padding: 5px 20px;
+  height: calc(100% - 88px); /* - (padding top + bottom) - 78px (filter field) */
+}
+
+.table {
   height: calc(100% - 56px); /* 56px is the height of paginator */
-  margin: auto;
   overflow: auto;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
 }

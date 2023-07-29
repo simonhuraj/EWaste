@@ -1,10 +1,27 @@
 import {AfterViewInit, Component, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
 import {DeliveryService} from "../../../services/delivery.service";
-import {filter, Observable, of, switchMap} from "rxjs";
+import {filter, map, Observable, of, switchMap} from "rxjs";
 import {Delivery} from "../../../entitites/delivery";
 import {MatTableDataSource} from "@angular/material/table";
 import {formatDate} from "@angular/common";
 import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+
+export class DeliveryForTable {
+  constructor(
+    public deliveryId: number,
+    public deliveredProduct: string,
+    public quantity: number,
+    public brand: string,
+    public deliveryDate: Date,
+    public specifications: string,
+    public functional: boolean,
+    public category: string,
+    public person: string,
+    public manager: string,
+    public state: string
+  ) {}
+}
 
 @Component({
   selector: 'app-waste-list',
@@ -13,62 +30,63 @@ import {MatPaginator} from "@angular/material/paginator";
 })
 export class WasteListComponent implements OnInit, AfterViewInit {
 
-  deliveries$: Observable<Delivery[]>;
+  deliveries$: Observable<DeliveryForTable[]>;
   refresh$: Observable<boolean>;
 
-  dataSource: MatTableDataSource<Delivery> = new MatTableDataSource<Delivery>();
+  dataSource: MatTableDataSource<DeliveryForTable> = new MatTableDataSource<DeliveryForTable>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   columnDefs = [
     {
       columnDef: 'deliveredProduct',
       header: 'Product',
-      cell: (element: Delivery) => element.deliveredProduct
+      cell: (element: DeliveryForTable) => element.deliveredProduct
     },
     {
       columnDef: 'quantity',
       header: 'Quantity',
-      cell: (element: Delivery) => element.quantity
+      cell: (element: DeliveryForTable) => element.quantity
     },
     {
       columnDef: 'brand',
       header: 'Brand',
-      cell: (element: Delivery) => element.brand
+      cell: (element: DeliveryForTable) => element.brand
     },
     {
       columnDef: 'deliveryDate',
       header: 'DeliveryDate',
-      cell: (element: Delivery) => formatDate(element.deliveryDate, 'yyyy-MM-dd HH:mm', this.locale)
+      cell: (element: DeliveryForTable) => formatDate(element.deliveryDate, 'yyyy-MM-dd HH:mm', this.locale)
     },
     {
       columnDef: 'specification',
       header: 'Specification',
-      cell: (element: Delivery) => element.specifications
+      cell: (element: DeliveryForTable) => element.specifications
     },
     {
       columnDef: 'functional',
       header: 'Functional',
-      cell: (element: Delivery) => element.functional
+      cell: (element: DeliveryForTable) => element.functional
     },
     {
       columnDef: 'category',
       header: 'Category',
-      cell: (element: Delivery) => element.category.name
+      cell: (element: DeliveryForTable) => element.category,
     },
     {
       columnDef: 'person',
       header: 'Person',
-      cell: (element: Delivery) => element.person.email
+      cell: (element: DeliveryForTable) => element.person
     },
     {
       columnDef: 'manager',
       header: 'Manager',
-      cell: (element: Delivery) => element.manager.username
+      cell: (element: DeliveryForTable) => element.manager
     },
     {
       columnDef: 'state',
       header: 'State',
-      cell: (element: Delivery) => element.state.name
+      cell: (element: DeliveryForTable) => element.state
     }
   ]
   displayedColumns = this.columnDefs.map(c => c.columnDef);
@@ -81,7 +99,22 @@ export class WasteListComponent implements OnInit, AfterViewInit {
     this.refresh$ = of(true);
     this.deliveries$ = this.refresh$.pipe(
       filter(Boolean),
-      switchMap(value => this.deliveryService.getAllDeliveries())
+      switchMap(value => this.deliveryService.getAllDeliveries()),
+      map(deliveries =>
+        deliveries.map(delivery => new DeliveryForTable(
+            delivery.deliveryId!,
+            delivery.deliveredProduct,
+            delivery.quantity,
+            delivery.brand,
+            delivery.deliveryDate,
+            delivery.specifications,
+            delivery.functional,
+            delivery.category.name,
+            delivery.person.email,
+            delivery.manager.username,
+            delivery.state.name
+          ))
+      )
     );
   }
 
@@ -92,8 +125,17 @@ export class WasteListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
 }
