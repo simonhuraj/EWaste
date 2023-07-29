@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Manager} from "../../entitites/manager";
-import {ManagerService} from "../../services/manager.service";
+import {ManagerService} from "../../services/api/manager.service";
 
 @Component({
   selector: 'app-login',

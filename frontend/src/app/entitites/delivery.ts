@@ -8,7 +8,7 @@ export class Delivery {
     public deliveredProduct: string,
     public quantity: number,
     public brand: string,
-    public deliveryDate: Date,
+    public deliveryDate: string,
     public specifications: string,
     public functional: boolean,
     public category: Category,

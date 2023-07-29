@@ -5,6 +5,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {authenticationGuardFunction} from "./guards/guards";
 import {HomeComponent} from "./components/home/home.component";
 import {WasteListComponent} from "./pages/waste/waste-list/waste-list.component";
+import {RegisterComponent} from "./pages/waste/register/register.component";
 
 
 const routes: Routes  = [
@@ -14,7 +15,8 @@ const routes: Routes  = [
     component: HomeComponent,
     canActivate: [authenticationGuardFunction()],
     children: [
-      { path: 'list', component: WasteListComponent },
+      { path: '', component: WasteListComponent },
+      { path: 'register', component: RegisterComponent },
       { path: 'not-found', component: NotFoundComponent },
       { path: '**', redirectTo: 'not-found'},
     ]

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Manager} from "../entitites/manager";
+import {Manager} from "../../entitites/manager";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, EMPTY} from "rxjs";
 import {Router} from "@angular/router";
-import {SnackbarService} from "./snackbar.service";
+import {SnackbarService} from "../common/snackbar.service";
 
 const DEFAULT_REDIRECT = '/list';
 @Injectable({

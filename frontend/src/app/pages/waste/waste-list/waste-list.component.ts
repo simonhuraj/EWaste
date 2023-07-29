@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
-import {DeliveryService} from "../../../services/delivery.service";
+import {DeliveryService} from "../../../services/api/delivery.service";
 import {filter, map, Observable, of, switchMap} from "rxjs";
 import {Delivery} from "../../../entitites/delivery";
 import {MatTableDataSource} from "@angular/material/table";
@@ -13,7 +13,7 @@ export class DeliveryForTable {
     public deliveredProduct: string,
     public quantity: number,
     public brand: string,
-    public deliveryDate: Date,
+    public deliveryDate: string,
     public specifications: string,
     public functional: boolean,
     public category: string,

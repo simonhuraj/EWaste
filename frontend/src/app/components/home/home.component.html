@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
   <span> {{title}} </span>
   <span class="spacer"></span>
-  <button mat-raised-button class="button" [routerLink]="'list'">
+  <button mat-raised-button class="button" routerLink="">
     Waste
   </button>
-  <button mat-raised-button color="accent" class="button" [routerLink]="'register'">
+  <button mat-raised-button color="accent" class="button" routerLink="register">
     Register
   </button>
   <button mat-raised-button color="warn" class="button" (click)="logOut()">

@@ -1,0 +1,16 @@
+.form-field {
+  display: block;
+}
+
+.form-container {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  margin: 10px;
+}
+
+.column:first-child {
+  margin-right: 20px;
+}

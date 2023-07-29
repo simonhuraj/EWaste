@@ -12,7 +12,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './components/home/home.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { WasteListComponent } from './pages/waste/waste-list/waste-list.component';
-import {HttpRequestInterceptor} from "./services/http-request-interceptor";
+import {HttpRequestInterceptor} from "./services/common/http-request-interceptor";
+import { RegisterComponent } from './pages/waste/register/register.component';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import {HttpRequestInterceptor} from "./services/http-request-interceptor";
     LoginComponent,
     HomeComponent,
     DialogConfirmComponent,
-    WasteListComponent
+    WasteListComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import {HttpRequestInterceptor} from "./services/http-request-interceptor";
     AppRoutingModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'sk-SK' }
   ],
   bootstrap: [AppComponent]
 })

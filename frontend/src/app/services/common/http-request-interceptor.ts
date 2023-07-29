@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ManagerService} from "./manager.service";
-import {apiUrl} from "../../environment";
+import {ManagerService} from "../api/manager.service";
+import {apiUrl} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import {CanActivateFn, Router} from "@angular/router";
-import {ManagerService} from "../services/manager.service";
+import {ManagerService} from "../services/api/manager.service";
 import {inject} from "@angular/core";
 
 export function authenticationGuardFunction(): CanActivateFn {
